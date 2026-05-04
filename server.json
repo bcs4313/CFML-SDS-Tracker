@@ -1,5 +1,16 @@
 {
+    "name":"SDS Tracker",
     "app":{
-        "cfengine":"lucee"
+        "cfengine":"lucee",
+        "restMappings":"/rest/*,/api/*"
+    },
+    "saveSettings":true,
+    "web":{
+        "adminPassword":"devpass",
+        "blockSensitivePaths":false,
+        "rewrites":{
+            "enable":false
+        },
+        "servletPassPredicate":"regex( '^/(.+?\\.cf[cms])(/.*)?$' ) or regex( '^/(.+?\\.bx[sm]{0,1})(/.*)?$' ) or path-prefix-nocase( '/rest/' ) or path-prefix-nocase( '/api/' )"
     }
 }
