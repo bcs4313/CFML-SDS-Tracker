@@ -1,6 +1,6 @@
 // abstraction layer for chemicals
 // uses ORM for our MySQL database.
-component accessors="true"  {
+component persistent="true" accessors="true" singleton {
     property name="id" fieldtype="id" generator="native";
     property name="name" ormtype="string" length="255";
     property name="casNumber" ormtype="string" length="string";
@@ -9,5 +9,16 @@ component accessors="true"  {
     // Required arguments are enforced via service factory functions.
     function init() {
         return true;
+    }
+
+    // create the new orm instance
+    // flush to the database
+    function create(required Chemical chemical) {
+        EntitySave(chemical);
+        ormFlush();
+    }
+
+    public Chemical function loadById(required numeric targetID) {
+        return EntityLoadByPK("Chemical", targetID);
     }
 }
