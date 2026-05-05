@@ -39,6 +39,7 @@ component {
     public boolean function onApplicationStart() {
         writeLog(file="restdebug", text="onApplicationStart fired");
         try {
+            // rest application initialization
             restInitApplication(
                 dirPath = expandPath("./api"),
                 serviceMapping = "api",
@@ -46,6 +47,10 @@ component {
                 default = true
             );
             writeLog(file="restdebug", text="restInitApplication succeeded");
+a
+            // assign singleton objects
+            application.chemicalService = CreateObject("component", "ChemicalService");
+            application.chemicalDAO = CreateObject("component", "ChemicalDAO");
         } catch(any e) {
             writeLog(file="restdebug", text="restInitApplication FAILED: " & e.message);
         }

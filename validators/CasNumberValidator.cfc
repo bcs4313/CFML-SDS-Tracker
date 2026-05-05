@@ -1,5 +1,5 @@
 component {
-    public boolean function validate(required string number) {
+    public static boolean function validate(required string number) {
         try
         {
             var casNumSections = listToArray(number, "-");  // divide

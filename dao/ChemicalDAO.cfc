@@ -1,6 +1,6 @@
 // abstraction layer for chemicals
 // uses ORM for our MySQL database.
-component persistent="true" accessors="true" singleton {
+component persistent="true" accessors="true" {
     property name="id" fieldtype="id" generator="native";
     property name="name" ormtype="string" length="255";
     property name="casNumber" ormtype="string" length="string";
