@@ -1,4 +1,4 @@
-<cfinclude template="\ui\shared\head.cfm">
+<cfinclude template="/ui/shared/head.cfm">
 <cfinclude template="\ui\shared\header.cfm">
-<p>Inventory page</p>
+<p>Submit page</p>
 <cfinclude template="\ui\shared\footer.cfm">

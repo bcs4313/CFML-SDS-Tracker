@@ -10,3 +10,5 @@
         <li><code>POST /api/...</code> — describe endpoint</li>
     </ul>
 </cfoutput>
+
+<cfinclude template="\ui\shared\footer.cfm">
