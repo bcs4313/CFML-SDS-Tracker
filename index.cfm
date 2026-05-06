@@ -3,7 +3,7 @@
 <html lang="en">
 <cfinclude template="ui/shared/head.cfm">
 <body>
-    <cfinclude template="\ui\shared\header.cfm">
+    <cfinclude template="/ui/shared/header.cfm">
     <cfoutput>
         <main>
             <h1>#pageTitle#</h1>
@@ -14,4 +14,4 @@
     </cfoutput>
 </body>
 </html>
-<cfinclude template="\ui\shared\footer.cfm">
+<cfinclude template="/ui/shared/footer.cfm">

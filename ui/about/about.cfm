@@ -1,5 +1,5 @@
 <cfinclude template="/ui/shared/head.cfm">
-<cfinclude template="\ui\shared\header.cfm">
+<cfinclude template="/ui/shared/header.cfm">
 <p>About page</p>
 
 
@@ -11,4 +11,4 @@
     </ul>
 </cfoutput>
 
-<cfinclude template="\ui\shared\footer.cfm">
+<cfinclude template="/ui/shared/footer.cfm">

@@ -18,8 +18,8 @@
             Manage Records
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Chemicals</a>
-            <a class="dropdown-item" href="#">Hazards</a>
+            <a class="dropdown-item" href="/ui/manageRecords/chemicals.cfm">Chemicals</a>
+            <a class="dropdown-item" href="/ui/manageRecords/hazards.cfm">Hazards</a>
             </div>
         </li>
 
