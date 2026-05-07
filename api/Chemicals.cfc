@@ -24,33 +24,24 @@ component rest="true" restpath="/chemicals" {
                 systemOutput("Creation Success. Returning status of 200");
                 restSetResponse({
                     status: 200,
-                    content: {
-                        msg: "Chemical Successfully Created."
-                    }
                 });
-                return;
+                return { msg: "Chemical Successfully Created." };
             }
             else {
                 systemOutput("Chemical Creation Failure. Reason = " & result);
                 restSetResponse({
                     status: 400,
-                    content: {
-                        error: "Chemical not created. Reason: " & result
-                    }
                 });
-                return;
+                return { error: "Chemical not created. Reason: " & result };
             }
         } catch (any e) {
             systemOutput(e);
             restSetResponse({
                 status: 400,
-                content: {
-                    error: "Chemical not created. Error: " & e.message
-                }
             });
-            return;
+            return { error: "Chemical not created. Error: " & e.message };
         }
 
-        return "Undefined Error. This message should never be sent.";
+        return { error: "Undefined Error. This message should never be sent." };
     }
 }
