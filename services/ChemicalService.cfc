@@ -16,5 +16,6 @@ component accessors="true" {
 
         // casNumber requires validation
         chemical.setCasNumber(casNumber);
+        
     }
 }

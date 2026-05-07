@@ -12,6 +12,7 @@ component {
         "/services": expandPath("./services"),
         "/dao": expandPath("./dao"),
         "/models": expandPath("./models"),
+        "/utilities": expandPath("./utilities"),
         "/root": expandPath("./")
     };
 
@@ -49,11 +50,13 @@ component {
             writeLog(file="restdebug", text="restInitApplication succeeded");
 a
             // assign singleton objects
-            application.chemicalService = CreateObject("component", "ChemicalService");
-            application.chemicalDAO = CreateObject("component", "ChemicalDAO");
+            application.chemicalService = CreateObject("component", "services.ChemicalService");
+            application.chemicalDAO = CreateObject("component", "dao.ChemicalDAO");
+            application.formDataHandler = createObject("component", "utilities.FormDataHandler");
         } catch(any e) {
             writeLog(file="restdebug", text="restInitApplication FAILED: " & e.message);
         }
+        
         return true;
     }
 
