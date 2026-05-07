@@ -2,7 +2,7 @@
 <cfinclude template="/ui/shared/head.cfm">
 <cfinclude template="/ui/shared/header.cfm">
 <body>
-    <form class="form-signin">
+    <form class="form-signin" action="/rest/api/chemicals/create" method="POST">
       <div class="text-center mb-4">
         <img class="mb-4" src="/assets/images/atom-symbol.jpg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Create Chemical</h1>
@@ -11,13 +11,13 @@
 
       <div class="form-label-group">
         <label for="chemicalName">Chemical Name</label>
-        <input type="text" id="chemicalName" class="form-control" placeholder="Dihydrogen Monoxide" required="" autofocus="">
+        <input name="name" type="text" id="chemicalName" class="form-control" placeholder="Dihydrogen Monoxide" required="" autofocus="">
       </div>
 
       
       <div class="form-label-group">
         <label for="casNumber">CAS Number</label>
-        <input type="text" id="casNumber" class="form-control" placeholder="7732-18-5"
+        <input name="casNumber" type="text" id="casNumber" class="form-control" placeholder="7732-18-5"
         oninput="updateCasDisplay(this.value)" required="" autofocus="">
         <div id="casError" class="text-danger" style="display: block">Error: please enter a valid CAS number</div>
       </div>
