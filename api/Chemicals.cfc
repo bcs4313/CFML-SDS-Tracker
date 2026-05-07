@@ -21,17 +21,27 @@ component rest="true" restpath="/chemicals" {
 
             if("success" == result)
             {
-
+                systemOutput("Creation Success. Returning status of 200");
+                restSetResponse({
+                    status: 200,
+                    content: {
+                        msg: "Chemical Successfully Created."
+                    }
+                });
+                return;
             }
             else {
+                systemOutput("Chemical Creation Failure. Reason = " & result);
                 restSetResponse({
                     status: 400,
                     content: {
-                        error: "Chemical not created. Reason: " & e.message
+                        error: "Chemical not created. Reason: " & result
                     }
                 });
+                return;
             }
         } catch (any e) {
+            systemOutput(e);
             restSetResponse({
                 status: 400,
                 content: {
@@ -41,6 +51,6 @@ component rest="true" restpath="/chemicals" {
             return;
         }
 
-        return "Successfully created Chemical.";
+        return "Undefined Error. This message should never be sent.";
     }
 }

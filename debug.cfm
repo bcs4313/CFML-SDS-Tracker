@@ -1,5 +1,9 @@
+<cfoutput>#fileExists(expandPath('/models/Chemical.cfc'))#</cfoutput>
 <cfscript>
-// Dump the entire REST application registry
-local.engine = createObject("java", "lucee.runtime.rest.RestUtil");
-writeDump(local.engine);
+    try {
+        chemical = new models.Chemical();
+        writeOutput("OK: " & getMetadata(chemical).name);
+    } catch (any e) {
+        writeOutput("FAIL: " & e.message);
+    }
 </cfscript>

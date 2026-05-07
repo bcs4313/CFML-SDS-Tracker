@@ -1,9 +1,10 @@
 component {
-    public static boolean function validate(required string number) {
+    public boolean function validate(required string number) {
+        systemOutput("casNumberValidator call: ON -> " & number);
         try
         {
             var casNumSections = listToArray(number, "-");  // divide
-            var rawNumberString = replace(number, "-", "");
+            var rawNumberString = replace(number, "-", "", "all");
 
             if(!isNumeric(rawNumberString)) { return false; }
 
@@ -27,6 +28,7 @@ component {
             for(i = (Len(rawNumberString)-1); i > 0; i--)
             {
                 var c = rawNumberString[i];
+                systemOutput("i=" & i & " c=" & c & " asc=" & asc(c));
                 var cNum = asc(c);  // ascii val
                 cNum -= 48;  // convert to digit
 

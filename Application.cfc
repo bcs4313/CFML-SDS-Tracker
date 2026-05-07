@@ -53,6 +53,8 @@ a
             application.chemicalService = CreateObject("component", "services.ChemicalService");
             application.chemicalDAO = CreateObject("component", "dao.ChemicalDAO");
             application.formDataHandler = createObject("component", "utilities.FormDataHandler");
+            application.casNumberValidator = createObject("component", "utilities.CasNumberValidator");
+            
         } catch(any e) {
             writeLog(file="restdebug", text="restInitApplication FAILED: " & e.message);
         }

@@ -5,17 +5,20 @@ component accessors="true" {
     // -> or <msg> specifying the reason for failure
     string function createChemical (String name, String casNumber) {
 
+        systemOutput(getApplicationSettings().mappings);
+
         // validate cas number first
-        var result = CasNumberValidator::validate(casNumber);
-        if(result == false) { return "Invalid casNumber for provided chemical."}
+        var result = application.CasNumberValidator.validate(casNumber);
+        if(result == false) { return "Invalid casNumber for provided chemical."; }
 
         // create the model
-        var chemical = createObject("component", "Chemical")
+        chemical = new models.Chemical();
 
         chemical.setName(name);
 
         // casNumber requires validation
         chemical.setCasNumber(casNumber);
-        
+
+        return "success";
     }
 }
