@@ -9,7 +9,7 @@ component persistent="true" accessors="true" {
         return true;
     }
 
-    property name="id" fieldtype="id" type="numeric" generator="native";  // primary key
+    property name="id" fieldtype="id" type="numeric" ormtype="integer" generator="native";  // primary key
 
     // common or preferred name of chemical
     property name="name" ormtype="string" length="255";

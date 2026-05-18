@@ -19,6 +19,7 @@ component {
     // Object Relational Model Configuration
     // sdstracler is the current datasource
     // which points to the H2 Database Engine (MySql)
+    this.ormenabled = true;
     this.ormSettings = {
         cfclocation = "models", // Directory where your entities are stored
         dbcreate = "update",    // Automatically updates database schema to match CFCs

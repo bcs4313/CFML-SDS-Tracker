@@ -12,17 +12,13 @@ component accessors="true" {
         if(result == false) { return "Invalid casNumber for provided chemical."; }
 
         // create the model
-        chemical = new models.Chemical();
-
-        chemical.setName(name);
-
-        // casNumber requires validation
-        chemical.setCasNumber(casNumber);
-
-        return "success";
+        var chemEntity = application.chemicalDAO.create(name, casNumber);
+        
+        return {"result:": "success", 
+        "data": deserializeJSON(chemEntity)};
     }
 
-    string function getAllChemicals() {
+    any function getAllChemicals() {
         return application.chemicalDAO.retrieveAllChemicals();
     }
 }
