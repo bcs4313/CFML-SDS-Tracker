@@ -9,8 +9,9 @@ component rest="true" restpath="/chemicals" {
     remote any function createChemical(required string formPayload restArgSource="body") httpmethod="POST" restpath="create" {
         systemOutput("createChemical REST Call. With form data...");
         systemOutput(formPayload);
+        systemOutput("converting form data to JSON...");
         var jsonPayload = application.formDataHandler.convertToJSON(formPayload);
-        systemOutput("func2");
+        systemOutput("deserializing json...");
         var json = deserializeJSON(jsonPayload);
         systemOutput("Creating Chemical... -> " & jsonPayload);
 
@@ -25,7 +26,7 @@ component rest="true" restpath="/chemicals" {
                 restSetResponse({
                     status: 200,
                 });
-                return { msg: "Chemical Successfully Created." };
+                return { msg: "Chemical Successfully Created.", name: json.name, casNumber: json.casNumber};
             }
             else {
                 systemOutput("Chemical Creation Failure. Reason = " & result);
