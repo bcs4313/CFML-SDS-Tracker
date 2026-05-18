@@ -28,17 +28,21 @@
     function gotoDashboard() {
         window.location.href = "/index.cfm";
     }
+    
     function gotoCreateChemical() {
         window.location.href = "/ui/manageRecords/createChemical.cfm";
     }
+
     function editChemical(id) {
         console.log("editChemical => " + id);
         window.location.href = "/ui/manageRecords/editChemical.cfm?id=" + id;
     }
+
     function deleteChemical(id) {
         console.log("deleteChemical => " + id);
         // hook up to your DELETE endpoint here
     }
+
     async function fetchChemicals() {
       console.log("fetchChemicals()");
       console.log(window.location.origin + "/rest/api/chemicals/getall");
