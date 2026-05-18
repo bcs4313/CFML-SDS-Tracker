@@ -10,25 +10,16 @@
 <hr></hr>
 <bold>Registered Chemicals</bold>
 
-<table style="margin-top:1em;" class="table table-dark">
+<table style="margin-top:1em;" class="chemContainer table table-dark">
   <thead>
     <tr>
       <th scope="col">id</th>
       <th scope="col">Chemical Name</th>
       <th scope="col">CAS Number</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Dihydrogen Monoxide</td>
-      <td>7732-18-5</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Ethanol (Ethyl Alcohol)</td>
-      <td>64-17-5</td>
-    </tr>
+  <tbody class="chemRows">
   </tbody>
 </table>
 
@@ -40,14 +31,44 @@
     function gotoCreateChemical() {
         window.location.href = "/ui/manageRecords/createChemical.cfm";
     }
-    function fetchChemicals() {
-      console.log("fetchChemicals()");
-      console.log(window.location.origin);
-      fetch(window.location.origin + "/rest/api/chemicals/").then(response => {
-        console.log("response = " + response.toString());
-      });
+    function editChemical(id) {
+        console.log("editChemical => " + id);
+        window.location.href = "/ui/manageRecords/editChemical.cfm?id=" + id;
     }
-    
+    function deleteChemical(id) {
+        console.log("deleteChemical => " + id);
+        // hook up to your DELETE endpoint here
+    }
+    async function fetchChemicals() {
+      console.log("fetchChemicals()");
+      console.log(window.location.origin + "/rest/api/chemicals/getall");
+      const response = await fetch(window.location.origin + "/rest/api/chemicals/getall");
+      const data = await response.json();
+      console.log(data);
+
+      // construct a table
+      const tbody = document.querySelector(".chemRows");
+      tbody.innerHTML = "";
+      data.forEach(entry => {
+        console.log("entry => ");
+        console.log(entry);
+        const tableRow = document.createElement('tr');
+        tableRow.innerHTML = `
+          <th scope="row">${entry.id}</th>
+          <td>${entry.name}</td>
+          <td>${entry.casNumber}</td>
+          <td>
+            <button type="button" onclick="editChemical(${entry.id})" class="btn btn-warning btn-sm">Edit</button>
+            <button type="button" onclick="deleteChemical(${entry.id})" class="btn btn-danger btn-sm">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tableRow);
+      });
+
+      console.log("dTable populated");
+      return tbody;
+    }
+    fetchChemicals()
 </script>
 
 <cfinclude template="/ui/shared/footer.cfm">
