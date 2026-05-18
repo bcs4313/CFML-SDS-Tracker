@@ -21,4 +21,8 @@ component accessors="true" {
 
         return "success";
     }
+
+    string function getAllChemicals() {
+        return application.chemicalDAO.retrieveAllChemicals();
+    }
 }

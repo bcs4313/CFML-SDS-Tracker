@@ -45,4 +45,10 @@ component rest="true" restpath="/chemicals" {
 
         return { error: "Undefined Error. This message should never be sent." };
     }
+
+    remote any function getAllChem() httpmethod="GET" restpath="getall"
+    {
+        systemOutput("getAllChem: REST GET");
+        return application.chemicalService.getAllChemicals();
+    }   
 }

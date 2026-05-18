@@ -40,6 +40,13 @@
     function gotoCreateChemical() {
         window.location.href = "/ui/manageRecords/createChemical.cfm";
     }
+    function fetchChemicals() {
+      console.log("fetchChemicals()");
+      console.log(window.location.origin);
+      fetch(window.location.origin + "/rest/api/chemicals/").then(response => {
+        console.log("response = " + response.toString());
+      });
+    }
     
 </script>
 
