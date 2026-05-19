@@ -3,7 +3,7 @@ component accessors="true" {
     // @return information on the status of the created object
     // -> "success"
     // -> or <msg> specifying the reason for failure
-    string function createChemical (String name, String casNumber) {
+    any function createChemical (String name, String casNumber) {
 
         systemOutput(getApplicationSettings().mappings);
 
@@ -14,8 +14,7 @@ component accessors="true" {
         // create the model
         var chemEntity = application.chemicalDAO.create(name, casNumber);
         
-        return {"result:": "success", 
-        "data": deserializeJSON(chemEntity)};
+        return "success";
     }
 
     any function getAllChemicals() {
