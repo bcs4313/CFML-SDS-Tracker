@@ -5,4 +5,5 @@
 - H2 / SQL Relational Database
 - ORM via Hibernate (Lucee built-in)  
 - Bootstrap styling
+- Swagger API Documentation
 - Git version control
