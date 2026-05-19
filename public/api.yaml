@@ -1,0 +1,70 @@
+openapi: 3.0.3
+info:
+  title: SDSTracker API
+  description: REST API for tracking chemicals and their safety data
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:4929
+    description: Local development
+
+paths:
+  /rest/api/chemicals/getall:
+    get:
+      summary: List all chemicals
+      tags: [Chemicals]
+      responses:
+        '200':
+          description: Array of chemicals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chemical'
+
+  /rest/api/chemicals/create:
+    post:
+      summary: Create a new chemical
+      tags: [Chemicals]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, casNumber]
+              properties:
+                name:
+                  type: string
+                  example: Acetone
+                casNumber:
+                  type: string
+                  example: 67-64-1
+      responses:
+        '200':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                    example: success
+        '400':
+          description: Validation failed (e.g., invalid CAS number)
+
+components:
+  schemas:
+    Chemical:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Dihydrogen Monoxide
+        casNumber:
+          type: string
+          example: 7732-18-5
