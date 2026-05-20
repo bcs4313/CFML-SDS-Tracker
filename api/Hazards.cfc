@@ -41,4 +41,15 @@ component rest="true" restpath="hazards" {
 
         return { error: "Undefined Error. This message should never be sent." }
     }
+
+    remote any function getAllHazards() httpmethod="GET" restpath="getall"
+    {
+        systemOutput("getAllHazards: REST GET");
+        return application.hazardService.getAllHazards();
+    }   
+
+    remote any function deleteHazard(required string id restArgSource="body") httpmethod="DELETE" restpath="delete"
+    {
+        return "test";
+    }
 }

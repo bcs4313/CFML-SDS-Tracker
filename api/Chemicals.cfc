@@ -51,4 +51,9 @@ component rest="true" restpath="/chemicals" {
         systemOutput("getAllChem: REST GET");
         return application.chemicalService.getAllChemicals();
     }   
+
+    remote any function deleteChemical(required string id restArgSource="body") httpmethod="DELETE" restpath="delete"
+    {
+
+    }
 }

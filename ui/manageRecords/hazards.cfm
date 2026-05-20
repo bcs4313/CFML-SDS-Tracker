@@ -39,9 +39,16 @@
     window.location.href = "/ui/manageRecords/editHazard.cfm?id=" + id;
   }
 
-  function deleteHazard(id) {
+  async function deleteHazard(id) {
+    const endpoint = window.location.origin + "/rest/api/hazards/delete";
     console.log("deleteHazard => " + id);
-    // hook up to your DELETE endpoint here
+    const response = await fetch(endpoint, {
+        method: 'DELETE',
+        body: 1,
+    });
+    const data = await response.json();
+    console.log("deletion call done:::");
+    console.log(data);
   }
 
   // Maps signal word to a Bootstrap badge color
@@ -84,7 +91,7 @@
         tableRow.innerHTML = `
           <th scope="row">${entry.id}</th>
           <td>${pictogramCell(entry)}</td>
-          <td>${entry.ghsHazardClass ?? '<span class="text-muted">—</span>'}</td>
+          <td>${entry.hazardClass ?? '<span class="text-muted">—</span>'}</td>
           <td>${signalWordBadge(entry.signalWord)}</td>
           <td><code>${entry.hCodes ?? '—'}</code></td>
           <td><code>${entry.pCodes ?? '—'}</code></td>
