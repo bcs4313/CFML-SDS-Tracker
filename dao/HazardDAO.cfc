@@ -2,24 +2,28 @@
 component accessors="true" {
     // create the new orm instance
     // flush to the database
-    any function create(String name, String casNumber) {
-        var chemical = EntityNew("Chemical");
+    any function create(required String name, required string ghsHazardClass, String pictogramUrl,
+    required string signalWord, required String hCodes, required String pCodes) {
+        var hazard = EntityNew("Hazard");
 
-        chemical.setName(name);
+        hazard.setName(name);
+        hazard.setHazardClass(ghsHazardClass);
+        hazard.setPictogramUrl(pictogramUrl);
+        hazard.setSignalWord(signalWord);
+        hazard.setHCodes(hCodes);
+        hazard.setPCodes(pCodes);
 
-        // casNumber requires validation
-        chemical.setCasNumber(casNumber);
-        EntitySave(chemical);
+        EntitySave(hazard);
         ormFlush();
 
-        return chemical;
+        return hazard;
     }
 
-    public any function retrieveAllChemicals() {
-        return EntityLoad("Chemical");
+    public any function retrieveAllHazards() {
+        return EntityLoad("Hazard");
     }
 
-    public Chemical function loadById(required numeric targetID) {
-        return EntityLoadByPK("Chemical", targetID);
+    public Hazard function loadById(required numeric targetID) {
+        return EntityLoadByPK("Hazard", targetID);
     }
 }

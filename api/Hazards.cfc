@@ -12,7 +12,8 @@ component rest="true" restpath="hazards" {
             systemOutput("hazard name = " & json.hazardName);
             systemOutput("hazard class = " & json.ghsHazardClass);
             systemOutput("signalWord = " & json.signalWord);
-            var result = application.chemicalService.createChemical(json.name, json.casNumber);
+            var result = application.hazardService.createHazard(json.hazardName, json.ghsHazardClass, 
+            json.pictogramUrl, json.signalWord, json.hCodes, json.pCodes);
 
             if("success" == result)
             {
@@ -20,21 +21,22 @@ component rest="true" restpath="hazards" {
                 restSetResponse({
                     status: 200,
                 });
-                return { msg: "Chemical Successfully Created.", name: json.name, casNumber: json.casNumber};
+                return { msg: "Hazard Successfully Created.", 
+                name: json.hazardName, hazardClass: json.ghsHazardClass, signalWord: json.signalWord};
             }
             else {
-                systemOutput("Chemical Creation Failure. Reason = " & result);
+                systemOutput("Hazard Creation Failure. Reason = " & result);
                 restSetResponse({
                     status: 400,
                 });
-                return { error: "Chemical not created. Reason: " & result };
+                return { error: "Hazard not created. Reason: " & result };
             }
         } catch (any e) {
             systemOutput(e);
             restSetResponse({
                 status: 400,
             });
-            return { error: "Chemical not created. Error: " & e.message };
+            return { error: "Hazard not created. Error: " & e.message };
         }
 
         return { error: "Undefined Error. This message should never be sent." }

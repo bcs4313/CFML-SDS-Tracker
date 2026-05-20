@@ -2,7 +2,7 @@
 component accessors="true" {
     // create the new orm instance
     // flush to the database
-    any function create(String name, String casNumber) {
+    any function create(required String name, required String casNumber) {
         var chemical = EntityNew("Chemical");
 
         chemical.setName(name);

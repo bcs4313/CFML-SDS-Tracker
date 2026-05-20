@@ -23,7 +23,8 @@ component {
     this.ormSettings = {
         cfclocation = "models", // Directory where your entities are stored
         dbcreate = "update",    // Automatically updates database schema to match CFCs
-        logsql = true           // Shows generated SQL in console for debugging
+        logsql = true,           // Shows generated SQL in console for debugging
+        datasource   = "sdstracker"
     };
     
     // REST registration
@@ -52,6 +53,8 @@ component {
 a
             // assign singleton objects
             application.chemicalService = CreateObject("component", "services.ChemicalService");
+            application.hazardService = CreateObject("component", "services.hazardService")
+            application.hazardDAO = CreateObject("component", "dao.HazardDAO");
             application.chemicalDAO = CreateObject("component", "dao.ChemicalDAO");
             application.formDataHandler = createObject("component", "utilities.FormDataHandler");
             application.casNumberValidator = createObject("component", "utilities.CasNumberValidator");
