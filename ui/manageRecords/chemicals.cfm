@@ -38,9 +38,21 @@
         window.location.href = "/ui/manageRecords/editChemical.cfm?id=" + id;
     }
 
-    function deleteChemical(id) {
+    async function deleteChemical(id) {
         console.log("deleteChemical => " + id);
-        // hook up to your DELETE endpoint here
+        try {
+        const endpoint = window.location.origin + "/rest/api/chemicals/delete";
+        const response = await fetch(endpoint, {
+            method: 'DELETE',
+            body: id,
+        });
+        const data = await response.json();
+        console.log("deletion call done:::");
+        console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+        await fetchChemicals();
     }
 
     async function fetchChemicals() {

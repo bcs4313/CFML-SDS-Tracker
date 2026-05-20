@@ -22,4 +22,10 @@ component accessors="true" {
     public Chemical function loadById(required numeric targetID) {
         return EntityLoadByPK("Chemical", targetID);
     }
+    
+    public any function delete(required numeric targetID) {
+        var entity = EntityLoadByPK("Chemical", targetID);
+        EntityDelete(entity);
+        return "done";
+    }
 }

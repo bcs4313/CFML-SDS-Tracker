@@ -20,4 +20,9 @@ component accessors="true" {
     any function getAllChemicals() {
         return application.chemicalDAO.retrieveAllChemicals();
     }
+
+    any function deleteChemical(required numeric id)
+    {
+        return application.chemicalDao.delete(id);
+    }
 }

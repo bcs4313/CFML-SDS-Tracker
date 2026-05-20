@@ -54,6 +54,8 @@ component rest="true" restpath="/chemicals" {
 
     remote any function deleteChemical(required string id restArgSource="body") httpmethod="DELETE" restpath="delete"
     {
-
+        systemOutput("deleteChemical: REST DELETE with id = ");
+        systemOutput(id);
+        return application.chemicalService.deleteChemical(id);
     }
 }
