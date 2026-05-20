@@ -50,6 +50,8 @@ component rest="true" restpath="hazards" {
 
     remote any function deleteHazard(required string id restArgSource="body") httpmethod="DELETE" restpath="delete"
     {
-        return "test";
+        systemOutput("deleteHazard: REST DELETE with id = ");
+        systemOutput(id);
+        return application.hazardService.deleteHazard(id);
     }
 }

@@ -26,4 +26,10 @@ component accessors="true" {
     public Hazard function loadById(required numeric targetID) {
         return EntityLoadByPK("Hazard", targetID);
     }
+
+    public any function delete(required numeric targetID) {
+        var entity = EntityLoadByPK("Hazard", targetID);
+        EntityDelete(entity);
+        return "done";
+    }
 }

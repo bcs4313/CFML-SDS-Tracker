@@ -17,4 +17,9 @@ component accessors="true" {
     any function getAllHazards() {
         return application.hazardDAO.retrieveAllHazards();
     }
+
+    any function deleteHazard(required numeric id)
+    {
+        return application.hazardDAO.delete(id);
+    }
 }

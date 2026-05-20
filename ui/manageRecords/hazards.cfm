@@ -40,15 +40,20 @@
   }
 
   async function deleteHazard(id) {
-    const endpoint = window.location.origin + "/rest/api/hazards/delete";
-    console.log("deleteHazard => " + id);
-    const response = await fetch(endpoint, {
-        method: 'DELETE',
-        body: 1,
-    });
-    const data = await response.json();
-    console.log("deletion call done:::");
-    console.log(data);
+    try {
+        const endpoint = window.location.origin + "/rest/api/hazards/delete";
+        console.log("deleteHazard => " + id);
+        const response = await fetch(endpoint, {
+            method: 'DELETE',
+            body: id,
+        });
+        const data = await response.json();
+        console.log("deletion call done:::");
+        console.log(data);
+    } catch (error) {
+        console.log(error);
+    }
+    await fetchHazards();
   }
 
   // Maps signal word to a Bootstrap badge color
