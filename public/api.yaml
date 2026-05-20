@@ -1,13 +1,22 @@
 openapi: 3.0.3
 info:
   title: SDSTracker API
-  description: REST API for tracking chemicals and their safety data
+  description: REST API for tracking chemicals and their safety data sheets
   version: 1.0.0
 servers:
   - url: http://127.0.0.1:4929
     description: Local development
 
+tags:
+  - name: Chemicals
+    description: Chemical inventory management
+  - name: Hazards
+    description: GHS hazard record management
+
 paths:
+
+ # ── Chemicals ──────────────────────────────────────────────────────────────
+
   /rest/api/chemicals/getall:
     get:
       summary: List all chemicals
@@ -39,23 +48,167 @@ paths:
                   example: Acetone
                 casNumber:
                   type: string
+                  description: Must pass CAS checksum validation
                   example: 67-64-1
       responses:
         '200':
-          description: Successfully created
+          description: Chemical successfully created
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  result:
+                  msg:
                     type: string
-                    example: success
+                    example: Chemical Successfully Created.
+                  name:
+                    type: string
+                    example: Acetone
+                  casNumber:
+                    type: string
+                    example: 67-64-1
         '400':
-          description: Validation failed (e.g., invalid CAS number)
+          description: Creation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /rest/api/chemicals/delete:
+    delete:
+      summary: Delete a chemical by ID
+      tags: [Chemicals]
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The numeric ID of the chemical to delete
+              example: "3"
+      responses:
+        '200':
+          description: Chemical successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Deletion failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ── Hazards ────────────────────────────────────────────────────────────────
+
+  /rest/api/hazards/getall:
+    get:
+      summary: List all hazards
+      tags: [Hazards]
+      responses:
+        '200':
+          description: Array of hazards
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hazard'
+
+  /rest/api/hazards/create:
+    post:
+      summary: Create a new hazard
+      tags: [Hazards]
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [hazardName, ghsHazardClass, signalWord, hCodes, pCodes]
+              properties:
+                hazardName:
+                  type: string
+                  example: Flammable Liquid Cat. 1
+                ghsHazardClass:
+                  type: string
+                  example: Flammable Liquid
+                pictogramUrl:
+                  type: string
+                  format: uri
+                  description: Optional URL to a GHS pictogram image
+                  example: https://example.com/flame.png
+                signalWord:
+                  type: string
+                  enum: [Danger, Warning]
+                  example: Danger
+                hCodes:
+                  type: string
+                  description: Comma-separated GHS hazard statement codes
+                  example: H225, H319
+                pCodes:
+                  type: string
+                  description: Comma-separated GHS precautionary statement codes
+                  example: P210, P233
+      responses:
+        '200':
+          description: Hazard successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Hazard Successfully Created.
+                  name:
+                    type: string
+                    example: Flammable Liquid Cat. 1
+                  hazardClass:
+                    type: string
+                    example: Flammable Liquid
+                  signalWord:
+                    type: string
+                    example: Danger
+        '400':
+          description: Creation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /rest/api/hazards/delete:
+    delete:
+      summary: Delete a hazard by ID
+      tags: [Hazards]
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The numeric ID of the hazard to delete
+              example: "2"
+      responses:
+        '200':
+          description: Hazard successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Deletion failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+# ── Schemas ──────────────────────────────────────────────────────────────────
 
 components:
   schemas:
+
     Chemical:
       type: object
       properties:
@@ -68,3 +221,46 @@ components:
         casNumber:
           type: string
           example: 7732-18-5
+
+    Hazard:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          description: Human-readable hazard name
+          example: Flammable Liquid Cat. 1
+        hazardClass:
+          type: string
+          example: Flammable Liquid
+        pictogramUrl:
+          type: string
+          format: uri
+          nullable: true
+          example: https://example.com/flame.png
+        signalWord:
+          type: string
+          enum: [Danger, Warning]
+          example: Danger
+        hCodes:
+          type: string
+          example: H225, H319
+        pCodes:
+          type: string
+          example: P210, P233
+
+    SuccessResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+          example: Operation successful.
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Operation failed. Reason: see detail field"
