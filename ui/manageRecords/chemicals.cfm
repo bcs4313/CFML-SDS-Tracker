@@ -46,31 +46,43 @@
     async function fetchChemicals() {
       console.log("fetchChemicals()");
       console.log(window.location.origin + "/rest/api/chemicals/getall");
-      const response = await fetch(window.location.origin + "/rest/api/chemicals/getall");
-      const data = await response.json();
-      console.log(data);
+      try
+      {
+        const response = await fetch(window.location.origin + "/rest/api/chemicals/getall");
+        const data = await response.json();
+        console.log(data);
 
-      // construct a table
-      const tbody = document.querySelector(".chemRows");
-      tbody.innerHTML = "";
-      data.forEach(entry => {
-        console.log("entry => ");
-        console.log(entry);
-        const tableRow = document.createElement('tr');
-        tableRow.innerHTML = `
-          <th scope="row">${entry.id}</th>
-          <td>${entry.name}</td>
-          <td>${entry.casNumber}</td>
-          <td>
-            <button type="button" onclick="editChemical(${entry.id})" class="btn btn-warning btn-sm">Edit</button>
-            <button type="button" onclick="deleteChemical(${entry.id})" class="btn btn-danger btn-sm">Delete</button>
-          </td>
+        // construct a table
+        const tbody = document.querySelector(".chemRows");
+        tbody.innerHTML = "";
+        data.forEach(entry => {
+          console.log("entry => ");
+          console.log(entry);
+          const tableRow = document.createElement('tr');
+          tableRow.innerHTML = `
+            <th scope="row">${entry.id}</th>
+            <td>${entry.name}</td>
+            <td>${entry.casNumber}</td>
+            <td>
+              <button type="button" onclick="editChemical(${entry.id})" class="btn btn-warning btn-sm">Edit</button>
+              <button type="button" onclick="deleteChemical(${entry.id})" class="btn btn-danger btn-sm">Delete</button>
+            </td>
+          `;
+          tbody.appendChild(tableRow);
+        });
+
+        console.log("dTable populated");
+        return tbody;
+      }
+      catch (err) {
+        console.error("fetchHazards failed:", err);
+        const tbody = document.querySelector(".hazardRows");
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center text-danger">Failed to load hazard data. Check the console for details.</td>
+          </tr>
         `;
-        tbody.appendChild(tableRow);
-      });
-
-      console.log("dTable populated");
-      return tbody;
+      }
     }
     fetchChemicals()
 </script>

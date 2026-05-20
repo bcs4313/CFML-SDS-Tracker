@@ -4,6 +4,7 @@
 
 
 <cfoutput>
+    <Button class="btn btn-primary" onclick='window.location="/ui/swagger.cfm"'>REST API Docs</Button>
     <h2>Endpoints</h2>
     <ul>
         <li><code>GET /api/...</code> — describe endpoint</li>
