@@ -29,7 +29,7 @@
                 <div class="col-sm-4">
                     <div class="card text-bg-dark h-100">
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-1 text-danger">Danger Hazards</h6>
+                            <h6 class="card-subtitle mb-1 text-danger">Dangerous Hazards</h6>
                             <p class="display-6 mb-0" id="statDanger">—</p>
                         </div>
                     </div>
