@@ -53,6 +53,22 @@ component rest="true" restpath="hazards" {
         return application.hazardService.getAllHazards();
     }   
 
+    remote any function getHazardById(required string id restArgSource="query") httpmethod="GET" restpath="get"
+    {
+        systemOutput("getHazardById: REST GET id=" & id);
+        try {
+            var hazard = application.hazardService.getHazardById(id);
+            if (isNull(hazard)) {
+                restSetResponse({ status: 404 });
+                return { error: "Hazard not found." };
+            }
+            return hazard;
+        } catch (any e) {
+            restSetResponse({ status: 400 });
+            return { error: "Error retrieving hazard: " & e.message };
+        }
+    }
+
     remote any function deleteHazard(required string id restArgSource="body") httpmethod="DELETE" restpath="delete"
     {
         systemOutput("deleteHazard: REST DELETE with id = ");

@@ -57,6 +57,22 @@ component rest="true" restpath="/chemicals" {
         return application.chemicalService.getAllChemicals();
     }   
 
+    remote any function getChemicalById(required string id restArgSource="query") httpmethod="GET" restpath="get"
+    {
+        systemOutput("getChemicalById: REST GET id=" & id);
+        try {
+            var chemical = application.chemicalService.getChemicalById(id);
+            if (isNull(chemical)) {
+                restSetResponse({ status: 404 });
+                return { error: "Chemical not found." };
+            }
+            return chemical;
+        } catch (any e) {
+            restSetResponse({ status: 400 });
+            return { error: "Error retrieving chemical: " & e.message };
+        }
+    }
+
     remote any function deleteChemical(required string id restArgSource="body") httpmethod="DELETE" restpath="delete"
     {
         systemOutput("deleteChemical: REST DELETE with id = ");
