@@ -67,8 +67,6 @@ component {
     }
 
     public boolean function onRequestStart(string targetPage) {
-        var req = getPageContext().getRequest();
-        writeLog(file="restdebug", text="ServletPath=[#req.getServletPath()#] PathInfo=[#isNull(req.getPathInfo()) ? 'NULL' : req.getPathInfo()#] RequestURI=[#req.getRequestURI()#]");
         return true;
     }
 }
