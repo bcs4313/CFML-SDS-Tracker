@@ -14,7 +14,7 @@
                     <div class="card text-bg-dark h-100">
                         <div class="card-body">
                             <h6 class="card-subtitle mb-1 text-primary">Registered Chemicals</h6>
-                            <p class="display-6 mb-0" id="statChemicals">—</p>
+                            <p class="display-6 mb-0" id="statChemicals">-</p>
                         </div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                     <div class="card text-bg-dark h-100">
                         <div class="card-body">
                             <h6 class="card-subtitle mb-1 text-warning">Registered Hazards</h6>
-                            <p class="display-6 mb-0" id="statHazards">—</p>
+                            <p class="display-6 mb-0" id="statHazards">-</p>
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     <div class="card text-bg-dark h-100">
                         <div class="card-body">
                             <h6 class="card-subtitle mb-1 text-danger">Dangerous Hazards</h6>
-                            <p class="display-6 mb-0" id="statDanger">—</p>
+                            <p class="display-6 mb-0" id="statDanger">-</p>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
 </body>
 
 <script>
-    // module-level cache — populated once by loadDashboard()
+    // module-level cache - populated once by loadDashboard()
     let allChemicals = [];
     let allHazards   = [];
 
@@ -163,7 +163,7 @@
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <th scope="row">${entry.id}</th>
-                    <td>${entry.hazardClass ?? '<span class="text-muted">—</span>'}</td>
+                    <td>${entry.hazardClass ?? '<span class="text-muted">-</span>'}</td>
                     <td>${signalWordBadge(entry.signalWord)}</td>
                 `;
                 hazTbody.appendChild(row);
@@ -227,7 +227,7 @@
             document.getElementById("statHazards").textContent   = allHazards.length;
             document.getElementById("statDanger").textContent    = allHazards.filter(h => h.signalWord?.toLowerCase() === "danger").length;
 
-            // recent chemicals — last 5
+            // recent chemicals - last 5
             const chemTbody = document.getElementById("recentChemicals");
             chemTbody.innerHTML = "";
             allChemicals.slice(-5).reverse().forEach(entry => {
@@ -240,14 +240,14 @@
                 chemTbody.appendChild(row);
             });
 
-            // recent hazards — last 5
+            // recent hazards - last 5
             const hazTbody = document.getElementById("recentHazards");
             hazTbody.innerHTML = "";
             allHazards.slice(-5).reverse().forEach(entry => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <th scope="row">${entry.id}</th>
-                    <td>${entry.hazardClass ?? '<span class="text-muted">—</span>'}</td>
+                    <td>${entry.hazardClass ?? '<span class="text-muted">-</span>'}</td>
                     <td>${signalWordBadge(entry.signalWord)}</td>
                 `;
                 hazTbody.appendChild(row);

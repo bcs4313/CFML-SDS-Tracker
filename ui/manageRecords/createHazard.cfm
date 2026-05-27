@@ -4,7 +4,7 @@
 <body>
   <form class="form-signin" action="/rest/api/hazards/create" method="POST">
     <div class="text-center mb-4">
-      <img class="mb-4" src="/assets/images/atom-symbol.jpg" alt="" width="72" height="72">
+      <img class="mb-4" src="/assets/images/HealthHazard.png" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Create Hazard</h1>
       <p class="text-secondary">Define a GHS hazard entry to associate with chemicals in your inventory.</p>
     </div>
@@ -62,7 +62,7 @@
 
     <hr>
     <p class="text-secondary" style="font-size:0.85em; margin-bottom:0.5em;">
-      Optional GHS / SDS fields — leave blank if not applicable.
+      Optional GHS / SDS fields - leave blank if not applicable.
     </p>
     <div class="form-label-group">
       <label for="hazardCategory">Hazard Category</label>
@@ -156,7 +156,7 @@
       errorEl.style.display = 'block';
     }
   }
-  
+
   // Aggregate checkbox values into the hidden field before submit
   document.querySelector('form').addEventListener('submit', function() {
     const checked = Array.from(document.querySelectorAll('input[type="checkbox"][name="exposureRoutes"]:checked'))

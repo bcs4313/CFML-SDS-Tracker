@@ -73,7 +73,7 @@
     if (entry.pictogram) {
       return `<span>${entry.pictogram}</span>`;
     }
-    return '<span class="text-muted">—</span>';
+    return '<span class="text-muted">-</span>';
   }
 
   async function fetchHazards() {
@@ -96,10 +96,10 @@
         tableRow.innerHTML = `
           <th scope="row">${entry.id}</th>
           <td>${pictogramCell(entry)}</td>
-          <td>${entry.hazardClass ?? '<span class="text-muted">—</span>'}</td>
+          <td>${entry.hazardClass ?? '<span class="text-muted">-</span>'}</td>
           <td>${signalWordBadge(entry.signalWord)}</td>
-          <td><code>${entry.hCodes ?? '—'}</code></td>
-          <td><code>${entry.pCodes ?? '—'}</code></td>
+          <td><code>${entry.hCodes ?? '-'}</code></td>
+          <td><code>${entry.pCodes ?? '-'}</code></td>
           <td>
             <button type="button" onclick="editHazard(${entry.id})" class="btn btn-warning btn-sm">Edit</button>
             <button type="button" onclick="deleteHazard(${entry.id})" class="btn btn-danger btn-sm">Delete</button>

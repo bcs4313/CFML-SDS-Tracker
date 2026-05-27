@@ -12,7 +12,7 @@ component persistent="true" accessors="true" {
     // Optional GHS / SDS fields
     // hazard category within the class (e.g. "1", "2A", "3")
     property name="hazardCategory" ormtype="string" length="20";
-    // routes of exposure relevant to this hazard — stored comma-separated
+    // routes of exposure relevant to this hazard - stored comma-separated
     // typical values: inhalation, skin contact, eye contact, ingestion
     property name="exposureRoutes" ormtype="string" length="255";
     // UN transport number for dangerous goods (e.g. "UN1090")
