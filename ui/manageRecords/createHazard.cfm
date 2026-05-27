@@ -60,6 +60,52 @@
       </div>
     </div>
 
+    <hr>
+    <p class="text-secondary" style="font-size:0.85em; margin-bottom:0.5em;">
+      Optional GHS / SDS fields — leave blank if not applicable.
+    </p>
+    <div class="form-label-group">
+      <label for="hazardCategory">Hazard Category</label>
+      <input name="hazardCategory" type="text" id="hazardCategory" class="form-control"
+        placeholder="e.g. 1, 2A, 3"
+        oninput="updateCategoryDisplay(this.value)">
+      <div id="hazardCategoryError" class="text-danger" style="display:none;">
+        Error: enter a category such as 1, 2, 2A, or 3
+      </div>
+    </div>
+    <div class="form-label-group">
+      <label>Routes of Exposure</label>
+      <div class="d-flex flex-wrap" style="gap:0.5em;">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="exposureRoutes" value="inhalation" id="routeInhalation">
+          <label class="form-check-label" for="routeInhalation">Inhalation</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="exposureRoutes" value="skin contact" id="routeSkin">
+          <label class="form-check-label" for="routeSkin">Skin Contact</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="exposureRoutes" value="eye contact" id="routeEye">
+          <label class="form-check-label" for="routeEye">Eye Contact</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="exposureRoutes" value="ingestion" id="routeIngestion">
+          <label class="form-check-label" for="routeIngestion">Ingestion</label>
+        </div>
+      </div>
+      <input type="hidden" name="exposureRoutes" id="exposureRoutesHidden">
+    </div>
+    <div class="form-label-group">
+      <label for="unNumber">UN Number</label>
+      <input name="unNumber" type="text" id="unNumber" class="form-control"
+        placeholder="e.g. UN1090"
+        oninput="updateUnDisplay(this.value)">
+      <div id="unNumberError" class="text-danger" style="display:none;">
+        Error: format is UN followed by 4 digits (e.g. UN1090)
+      </div>
+    </div>
+
+    <hr>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Submit Hazard</button>
   </form>
 </body>
@@ -93,6 +139,33 @@
       errorEl.style.display = 'block';
     }
   }
+
+  function updateCategoryDisplay(value) {
+    const errorEl = document.getElementById('hazardCategoryError');
+    if (value.trim() === '' || /^[1-4][AB]?$/.test(value.trim())) {
+      errorEl.style.display = 'none';
+    } else {
+      errorEl.style.display = 'block';
+    }
+  }
+  function updateUnDisplay(value) {
+    const errorEl = document.getElementById('unNumberError');
+    if (value.trim() === '' || /^UN\d{4}$/.test(value.trim())) {
+      errorEl.style.display = 'none';
+    } else {
+      errorEl.style.display = 'block';
+    }
+  }
+  
+  // Aggregate checkbox values into the hidden field before submit
+  document.querySelector('form').addEventListener('submit', function() {
+    const checked = Array.from(document.querySelectorAll('input[type="checkbox"][name="exposureRoutes"]:checked'))
+      .map(cb => cb.value);
+    document.getElementById('exposureRoutesHidden').value = checked.join(', ');
+    document.querySelectorAll('input[type="checkbox"][name="exposureRoutes"]').forEach(cb => {
+      cb.disabled = true;
+    });
+  });
 </script>
 
 <cfinclude template="/ui/shared/footer.cfm">
