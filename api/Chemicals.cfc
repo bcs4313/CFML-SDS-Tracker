@@ -18,7 +18,12 @@ component rest="true" restpath="/chemicals" {
         try {
             systemOutput("name = " & json.name);
             systemOutput("casNumber" & json.casNumber);
-            var result = application.chemicalService.createChemical(json.name, json.casNumber);
+            var iupacName = structKeyExists(json, "iupacName") ? json.iupacName : "";
+            var molecularFormula = structKeyExists(json, "molecularFormula") ? json.molecularFormula : "";
+            var physicalState = structKeyExists(json, "physicalState") ? json.physicalState : "";
+            var molecularWeight = structKeyExists(json, "molecularWeight") ? json.molecularWeight : "";
+            var result = application.chemicalService.createChemical(json.name, json.casNumber,
+                iupacName, molecularFormula, physicalState, molecularWeight);
 
             if("success" == result)
             {

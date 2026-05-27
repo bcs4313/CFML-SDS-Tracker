@@ -3,7 +3,8 @@ component accessors="true" {
     // @return information on the status of the created object
     // -> "success"
     // -> or <msg> specifying the reason for failure
-    any function createChemical (String name, String casNumber) {
+    any function createChemical(String name, String casNumber,
+        String iupacName="", String molecularFormula="", String physicalState="", String molecularWeight="") {
 
         systemOutput(getApplicationSettings().mappings);
 
@@ -12,7 +13,8 @@ component accessors="true" {
         if(result == false) { return "Invalid casNumber for provided chemical."; }
 
         // create the model
-        var chemEntity = application.chemicalDAO.create(name, casNumber);
+        var chemEntity = application.chemicalDAO.create(name, casNumber, iupacName, molecularFormula, 
+        physicalState, molecularWeight);
         
         return "success";
     }
