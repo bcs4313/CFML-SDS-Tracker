@@ -50,7 +50,7 @@ component {
                 default = true
             );
             writeLog(file="restdebug", text="restInitApplication succeeded");
-a
+            
             // assign singleton objects
             application.chemicalService = CreateObject("component", "services.ChemicalService");
             application.hazardService = CreateObject("component", "services.hazardService")

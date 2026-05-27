@@ -223,7 +223,7 @@
             console.log("hazards =>", allHazards);
 
             // stat cards
-            document.getElementById("statChemicals").textContent = allChemicals.length == 0;
+            document.getElementById("statChemicals").textContent = allChemicals.length;
             document.getElementById("statHazards").textContent   = allHazards.length;
             document.getElementById("statDanger").textContent    = allHazards.filter(h => h.signalWord?.toLowerCase() === "danger").length;
 
