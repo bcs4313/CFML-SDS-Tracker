@@ -34,6 +34,10 @@
     window.location.href = "/ui/manageRecords/createHazard.cfm";
   }
 
+  function viewHazard(id) {
+    window.location.href = "/ui/manageRecords/viewHazard.cfm?id=" + id;
+  }
+
   function editHazard(id) {
     console.log("editHazard => " + id);
     window.location.href = "/ui/manageRecords/editHazard.cfm?id=" + id;
@@ -101,6 +105,7 @@
           <td><code>${entry.hCodes ?? '-'}</code></td>
           <td><code>${entry.pCodes ?? '-'}</code></td>
           <td>
+            <button type="button" onclick="viewHazard(${entry.id})" class="btn btn-info btn-sm">View</button>
             <button type="button" onclick="editHazard(${entry.id})" class="btn btn-warning btn-sm">Edit</button>
             <button type="button" onclick="deleteHazard(${entry.id})" class="btn btn-danger btn-sm">Delete</button>
           </td>

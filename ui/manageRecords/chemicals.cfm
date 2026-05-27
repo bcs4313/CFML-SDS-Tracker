@@ -33,6 +33,10 @@
         window.location.href = "/ui/manageRecords/createChemical.cfm";
     }
 
+    function viewChemical(id) {
+        window.location.href = "/ui/manageRecords/viewChemical.cfm?id=" + id;
+    }
+
     function editChemical(id) {
         console.log("editChemical => " + id);
         window.location.href = "/ui/manageRecords/editChemical.cfm?id=" + id;
@@ -76,6 +80,7 @@
             <td>${entry.name}</td>
             <td>${entry.casNumber}</td>
             <td>
+              <button type="button" onclick="viewChemical(${entry.id})" class="btn btn-info btn-sm">View</button>
               <button type="button" onclick="editChemical(${entry.id})" class="btn btn-warning btn-sm">Edit</button>
               <button type="button" onclick="deleteChemical(${entry.id})" class="btn btn-danger btn-sm">Delete</button>
             </td>
@@ -87,11 +92,11 @@
         return tbody;
       }
       catch (err) {
-        console.error("fetchHazards failed:", err);
-        const tbody = document.querySelector(".hazardRows");
+        console.error("fetchChemicals failed:", err);
+        const tbody = document.querySelector(".chemRows");
         tbody.innerHTML = `
           <tr>
-            <td colspan="7" class="text-center text-danger">Failed to load hazard data. Check the console for details.</td>
+            <td colspan="4" class="text-center text-danger">Failed to load chemical data. Check the console for details.</td>
           </tr>
         `;
       }
