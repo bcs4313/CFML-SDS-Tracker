@@ -18,4 +18,14 @@ component persistent="true" accessors="true" {
     // requires business logic to verify the property's integrity
     property name="casNumber" ormtype="string" length="255";
 
+    // optional GHS / SDS fields
+    // IUPAC systematic name (e.g. "oxidane" for water)
+    property name="iupacName" ormtype="string" length="255";
+    // molecular formula in Hill notation (e.g. "H2O", "C6H6")
+    property name="molecularFormula" ormtype="string" length="100";
+    // physical state at standard conditions: solid | liquid | gas | unknown
+    property name="physicalState" ormtype="string" length="20";
+    // molecular weight in g/mol (e.g. "18.015")
+    property name="molecularWeight" ormtype="string" length="50";
+
 }
