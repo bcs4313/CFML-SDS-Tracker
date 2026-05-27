@@ -31,6 +31,31 @@ paths:
                 items:
                   $ref: '#/components/schemas/Chemical'
 
+  /rest/api/chemicals/get:
+    get:
+      summary: Get a single chemical by ID
+      tags: [Chemicals]
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        '200':
+          description: Chemical record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chemical'
+        '404':
+          description: Chemical not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /rest/api/chemicals/create:
     post:
       summary: Create a new chemical
@@ -50,6 +75,19 @@ paths:
                   type: string
                   description: Must pass CAS checksum validation
                   example: 67-64-1
+                iupacName:
+                  type: string
+                  example: propan-2-one
+                molecularFormula:
+                  type: string
+                  example: C3H6O
+                physicalState:
+                  type: string
+                  enum: [Solid, Liquid, Gas]
+                  example: Liquid
+                molecularWeight:
+                  type: string
+                  example: "58.08"
       responses:
         '200':
           description: Chemical successfully created
@@ -116,6 +154,31 @@ paths:
                 items:
                   $ref: '#/components/schemas/Hazard'
 
+  /rest/api/hazards/get:
+    get:
+      summary: Get a single hazard by ID
+      tags: [Hazards]
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        '200':
+          description: Hazard record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hazard'
+        '404':
+          description: Hazard not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /rest/api/hazards/create:
     post:
       summary: Create a new hazard
@@ -151,6 +214,17 @@ paths:
                   type: string
                   description: Comma-separated GHS precautionary statement codes
                   example: P210, P233
+                hazardCategory:
+                  type: string
+                  example: Category 1
+                exposureRoutes:
+                  type: string
+                  description: Comma-separated routes of exposure
+                  example: Inhalation, Skin contact
+                unNumber:
+                  type: string
+                  description: UN transport hazard number
+                  example: UN1090
       responses:
         '200':
           description: Hazard successfully created
@@ -221,6 +295,23 @@ components:
         casNumber:
           type: string
           example: 7732-18-5
+        iupacName:
+          type: string
+          nullable: true
+          example: oxidane
+        molecularFormula:
+          type: string
+          nullable: true
+          example: H2O
+        physicalState:
+          type: string
+          nullable: true
+          enum: [Solid, Liquid, Gas]
+          example: Liquid
+        molecularWeight:
+          type: string
+          nullable: true
+          example: "18.02"
 
     Hazard:
       type: object
@@ -250,6 +341,18 @@ components:
         pCodes:
           type: string
           example: P210, P233
+        hazardCategory:
+          type: string
+          nullable: true
+          example: Category 1
+        exposureRoutes:
+          type: string
+          nullable: true
+          example: Inhalation, Skin contact
+        unNumber:
+          type: string
+          nullable: true
+          example: UN1090
 
     SuccessResponse:
       type: object
