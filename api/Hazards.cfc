@@ -12,8 +12,13 @@ component rest="true" restpath="hazards" {
             systemOutput("hazard name = " & json.hazardName);
             systemOutput("hazard class = " & json.ghsHazardClass);
             systemOutput("signalWord = " & json.signalWord);
+
+            var hazardCategory = structKeyExists(json, "hazardCategory") ? json.hazardCategory : "";
+            var exposureRoutes = structKeyExists(json, "exposureRoutes") ? json.exposureRoutes : "";
+            var unNumber = structKeyExists(json, "unNumber") ? json.unNumber : "";
             var result = application.hazardService.createHazard(json.hazardName, json.ghsHazardClass, 
-            json.pictogramUrl, json.signalWord, json.hCodes, json.pCodes);
+            json.pictogramUrl, json.signalWord, json.hCodes, json.pCodes,
+            hazardCategory, exposureRoutes, unNumber);
 
             if("success" == result)
             {
