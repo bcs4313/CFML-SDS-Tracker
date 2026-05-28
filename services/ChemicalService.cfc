@@ -23,6 +23,10 @@ component accessors="true" {
         return application.chemicalDAO.retrieveAllChemicals();
     }
 
+
+    any function getChemicalById(required numeric id) {
+        return application.chemicalDAO.loadById(id);
+    }
     any function deleteChemical(required numeric id)
     {
         return application.chemicalDao.delete(id);

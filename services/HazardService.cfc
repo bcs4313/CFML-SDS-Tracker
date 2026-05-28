@@ -20,6 +20,10 @@ component accessors="true" {
         return application.hazardDAO.retrieveAllHazards();
     }
 
+
+    any function getHazardById(required numeric id) {
+        return application.hazardDAO.loadById(id);
+    }
     any function deleteHazard(required numeric id)
     {
         return application.hazardDAO.delete(id);
