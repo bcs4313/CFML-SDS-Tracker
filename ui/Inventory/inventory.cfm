@@ -3,7 +3,7 @@
 
 <div class="container-fluid mt-3">
   <h4>Chemical Inventory</h4>
-  <p class="text-muted">
+  <p class="meta">
     Showing all registered chemicals. Physical stock tracking (location, quantity, storage unit)
     is planned for a future release.
   </p>
