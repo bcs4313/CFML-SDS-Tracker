@@ -2,6 +2,10 @@
 
 A Safety Data Sheet (SDS) management application for tracking chemical inventory and GHS hazard records.
 
+<img src="https://cdn.allthepics.net/images/2026/05/28/Screenshot-2026-05-28-081918.png" width="100%">
+
+<img src="https://cdn.allthepics.net/images/2026/05/28/Screenshot-2026-05-28-081828.png" width="100%">
+
 ---
 
 ## Tech Stack
