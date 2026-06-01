@@ -1,3 +1,5 @@
+### A separate branch is present for the migration of this application to vue.js.
+
 # SDS Tracker
 
 A Safety Data Sheet (SDS) management application for tracking chemical inventory and GHS hazard records.
